@@ -59,7 +59,7 @@
             margin-bottom: 30px;
             margin-top: -40px;
             line-height: 1.4;
-            min-height: 72px; /* Giữ khung chữ không bị giật khi đổi nội dung */
+            min-height: 72px;
         }
 
         /* Khu vực hiển thị nhãn dán */
@@ -104,7 +104,7 @@
             background-color: #dc3545;
             color: white;
             width: 160px;
-            z-index: 10; /* Nút vâng nằm ở trên */
+            z-index: 10;
             position: relative;
         }
 
@@ -117,7 +117,7 @@
             position: absolute;
             top: 80px;
             transition: all 0.1s ease-out;
-            z-index: 5; /* Ban đầu nằm dưới nhưng ở vị trí khác */
+            z-index: 5;
             touch-action: none;
         }
     </style>
@@ -145,16 +145,15 @@
         const subText = document.getElementById('sub-text');
         const stickerImg = document.getElementById('sticker-img');
 
-        let countNo = 0; // Biến đếm số lần tương tác với nút Không
+        let countNo = 0;
 
-        // Hàm xử lý khi chạm hoặc rê chuột vào nút Không
         function xuLyNutNo(e) {
             if (e) {
                 e.preventDefault();
                 e.stopPropagation();
             }
 
-            countNo++; // Tăng số lần đếm lên
+            countNo++;
 
             if (countNo === 1) {
                 mainText.innerHTML = "xin lỗi mà t bt sai rồi";
@@ -170,7 +169,6 @@
                 stickerImg.src = "https://i.postimg.cc/h41RbzJs/Screenshot-20260525-163337.jpg";
             }
 
-            // Nếu chưa quá 4 lần, nút vẫn nhảy trốn ngẫu nhiên
             if (countNo <= 4) {
                 const maxX = 140; 
                 const maxY = 60;  
@@ -178,27 +176,24 @@
                 const yNgauNhien = (Math.random() - 0.5) * maxY * 2;
                 btnNo.style.transform = `translate(${xNgauNhien}px, ${yNgauNhien}px)`;
             } else {
-                // Sau khi ấn/chạm quá 4 lần, nút Không sẽ chui thẳng ra phía sau nút Vâng và ẩn đi
                 btnNo.style.transition = "all 0.3s ease-in-out";
-                btnNo.style.top = "0px"; // Đưa về vị trí của nút Vâng
-                btnNo.style.transform = "translate(0px, 0px)"; // Xóa tọa độ nhảy ngẫu nhiên
-                btnNo.style.width = "160px"; // Chỉnh bằng kích thước nút Vâng để trốn hoàn toàn
-                btnNo.style.zIndex = "1"; // Cho chui xuống dưới đáy nút Vâng hẳn luôn
+                btnNo.style.top = "0px"; 
+                btnNo.style.transform = "translate(0px, 0px)"; 
+                btnNo.style.width = "160px"; 
+                btnNo.style.zIndex = "1"; 
             }
         }
 
-        // Đăng ký sự kiện phản hồi siêu nhạy cho nút Không
         btnNo.addEventListener('mouseover', xuLyNutNo);
         btnNo.addEventListener('touchstart', xuLyNutNo, {passive: false});
         btnNo.addEventListener('mousedown', xuLyNutNo);
 
-        // Kịch bản chuỗi chữ chạy khi đối phương đầu hàng bấm "Vâng"
         btnYes.addEventListener('click', () => {
             btnYes.style.display = 'none';
             btnNo.style.display = 'none';
             subText.style.display = 'none';
 
-            // Đổi sang ảnh ôm nhau ấm áp theo đúng link yêu cầu của bạn
+            // Đảm bảo link ảnh cuối dùng HTTPS sạch để không bị chặn bảo mật
             stickerImg.src = "https://i.postimg.cc/CKT8gQFs/Sticker-muon-om-giup-tro-chuyen-them-am.webp";
 
             mainText.innerHTML = "iu thí =)))❤️";
